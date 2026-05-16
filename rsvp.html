@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're invited — Sophie &amp; James' Wedding</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* RSVP page is mobile-first — guests open this on their phones */
+    body { background: var(--ivory); }
+
+    .rsvp-hero {
+      background: linear-gradient(160deg, #F2CACE 0%, #F5ECD7 50%, #EBD5F0 100%);
+      padding: 56px 24px 40px;
+      text-align: center;
+    }
+    .rsvp-hero .monogram {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--white);
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: var(--dusty-rose);
+      box-shadow: var(--shadow-md);
+      font-style: italic;
+    }
+    .rsvp-hero h1 {
+      font-size: clamp(1.8rem, 6vw, 2.5rem);
+      margin-bottom: 8px;
+    }
+    .rsvp-hero .tagline {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--dusty-rose);
+      margin-bottom: 20px;
+    }
+    .rsvp-hero .meta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.875rem;
+      color: var(--warm-gray);
+    }
+    .rsvp-hero .meta span { display: flex; align-items: center; gap: 6px; }
+
+    .rsvp-container {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .rsvp-card {
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 20px;
+    }
+
+    .rsvp-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 24px 0;
+    }
+    .rsvp-btn {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      border: 2px solid var(--light-gray);
+      background: var(--white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .rsvp-btn.accept { color: var(--success); }
+    .rsvp-btn.accept:hover, .rsvp-btn.accept.active {
+      border-color: var(--success);
+      background: var(--success-light);
+    }
+    .rsvp-btn.decline { color: var(--danger); }
+    .rsvp-btn.decline:hover, .rsvp-btn.decline.active {
+      border-color: var(--danger);
+      background: var(--danger-light);
+    }
+    .rsvp-emoji { font-size: 2rem; display: block; margin-bottom: 4px; }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-icon { font-size: 1.2rem; width: 28px; flex-shrink: 0; text-align: center; margin-top: 2px; }
+    .info-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 2px; }
+    .info-value { font-size: 0.9rem; color: var(--charcoal); }
+
+    .registry-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border: 1.5px solid var(--light-gray);
+      border-radius: var(--radius-md);
+      margin-bottom: 10px;
+      transition: all 0.2s;
+    }
+    .registry-link:hover { border-color: var(--rose); background: var(--blush); }
+    .registry-link-name { font-size: 0.9rem; font-weight: 700; color: var(--charcoal); }
+    .registry-link-sub  { font-size: 0.75rem; color: var(--muted); }
+
+    /* Success state */
+    .rsvp-success {
+      text-align: center;
+      padding: 40px 24px;
+      display: none;
+    }
+    .rsvp-success .big-emoji { font-size: 4rem; margin-bottom: 16px; }
+    .rsvp-success h2 { font-family: var(--font-heading); color: var(--charcoal); margin-bottom: 12px; }
+
+    /* Powered by footer */
+    .powered-by {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 40px;
+    }
+    .powered-by a { color: var(--dusty-rose); font-weight: 700; }
+  </style>
+</head>
+<body>
+
+<!-- RSVP page has no navigation — this is a public guest-facing page -->
+
+<div class="rsvp-hero">
+  <div class="monogram">S&amp;J</div>
+  <p class="tagline">Together with their families</p>
+  <h1>Sophie &amp; James</h1>
+  <p style="font-family:var(--font-heading); font-style:italic; color:var(--warm-gray); margin-bottom:20px;">invite you to celebrate their wedding</p>
+  <div class="meta">
+    <span>💍 Saturday 14 June 2026</span>
+    <span>🕐 1:00 pm</span>
+    <span>📍 Rosewood Manor, Surrey</span>
+  </div>
+</div>
+
+<div class="rsvp-container">
+
+  <!-- Personal greeting -->
+  <div style="text-align:center; margin-bottom:28px;">
+    <p style="font-family:var(--font-heading); font-size:1.05rem; color:var(--charcoal); font-style:italic;">
+      Dear Charlotte,
+    </p>
+    <p class="text-sm text-muted" style="margin-top:6px;">We'd love to celebrate this special day with you. Please let us know if you can make it.</p>
+  </div>
+
+  <!-- RSVP card -->
+  <div class="rsvp-card" id="rsvp-form">
+    <h3 style="font-family:var(--font-heading); font-size:1.15rem; text-align:center; margin-bottom:4px;">Will you be joining us?</h3>
+    <p class="text-sm text-muted text-center" style="margin-bottom:0;">Please reply by 1 June 2026</p>
+
+    <div class="rsvp-btns">
+      <button class="rsvp-btn accept" onclick="selectRsvp('accept', this)">
+        <span class="rsvp-emoji">🥂</span>
+        Joyfully accepts
+      </button>
+      <button class="rsvp-btn decline" onclick="selectRsvp('decline', this)">
+        <span class="rsvp-emoji">💌</span>
+        Regretfully declines
+      </button>
+    </div>
+
+    <!-- Shown after accepting -->
+    <div id="accept-form" style="display:none;">
+      <div class="divider divider-rose"></div>
+
+      <div class="form-group">
+        <label class="form-label">Your full name</label>
+        <input class="form-input" type="text" placeholder="Charlotte Mills" value="Charlotte Mills" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Will you be bringing a guest? <span style="font-size:0.78rem; color:var(--muted); font-weight:400;">(you were invited with +1)</span></label>
+        <div style="display:flex; gap:10px; margin-top:6px;">
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:0.9rem;">
+            <input type="radio" name="plus-one" value="yes" checked style="accent-color:var(--dusty-rose);"> Yes, I'll bring a guest
+          </label>
+          <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-size:0.9rem;">
+            <input type="radio" name="plus-one" value="no" style="accent-color:var(--dusty-rose);"> No, just me
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Guest's name <span style="font-weight:400; color:var(--muted);">(optional)</span></label>
+        <input class="form-input" type="text" placeholder="Your guest's name" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Any dietary requirements?</label>
+        <input class="form-input" type="text" placeholder="e.g. vegetarian, nut allergy, gluten-free…" />
+        <p class="form-hint">Please let us know anything we should be aware of for the menu.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">A message for the couple <span style="font-weight:400; color:var(--muted);">(optional)</span></label>
+        <textarea class="form-textarea" style="min-height:80px;" placeholder="Share your congratulations or well wishes…"></textarea>
+      </div>
+
+      <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="submitRsvp()">
+        🌸 Confirm my RSVP
+      </button>
+    </div>
+
+    <!-- Shown after declining -->
+    <div id="decline-form" style="display:none;">
+      <div class="divider divider-rose"></div>
+      <div class="form-group">
+        <label class="form-label">Your name</label>
+        <input class="form-input" type="text" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">A message for the couple <span style="font-weight:400; color:var(--muted);">(optional)</span></label>
+        <textarea class="form-textarea" style="min-height:80px;" placeholder="We're sorry you can't make it — let them know your thoughts…"></textarea>
+      </div>
+      <button class="btn btn-ghost" style="width:100%; justify-content:center; color:var(--danger); border-color:var(--danger);" onclick="submitRsvp()">
+        Send my regrets
+      </button>
+    </div>
+  </div>
+
+  <!-- Success state -->
+  <div class="rsvp-card rsvp-success" id="rsvp-success">
+    <div class="big-emoji">🌸</div>
+    <h2>You're confirmed!</h2>
+    <p style="color:var(--warm-gray); margin-bottom:20px;">
+      We've let Sophie &amp; James know you'll be joining them. We can't wait to celebrate together!
+    </p>
+    <div style="background:var(--blush); border-radius:var(--radius-lg); padding:16px; font-size:0.875rem; color:var(--warm-gray);">
+      <strong style="color:var(--charcoal);">📅 Add to your calendar</strong><br />
+      Saturday 14 June 2026 · 1:00 pm<br />
+      Rosewood Manor, Guildford, Surrey
+    </div>
+    <div style="display:flex; gap:10px; margin-top:16px; justify-content:center;">
+      <a href="#" class="btn btn-ghost btn-sm">🍎 Apple Calendar</a>
+      <a href="#" class="btn btn-ghost btn-sm">📅 Google Calendar</a>
+    </div>
+  </div>
+
+  <!-- Event info -->
+  <div class="rsvp-card">
+    <h3 style="font-family:var(--font-heading); font-size:1rem; margin-bottom:8px;">Event details</h3>
+    <div class="info-row">
+      <div class="info-icon">📅</div>
+      <div>
+        <div class="info-label">Date &amp; Time</div>
+        <div class="info-value">Saturday 14 June 2026 · 1:00 pm – 11:00 pm BST</div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">📍</div>
+      <div>
+        <div class="info-label">Venue</div>
+        <div class="info-value">Rosewood Manor<br /><span style="color:var(--muted); font-size:0.82rem;">Rosewood Lane, Guildford, Surrey GU2 4JT</span></div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">👗</div>
+      <div>
+        <div class="info-label">Dress code</div>
+        <div class="info-value">Cocktail Attire</div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">💌</div>
+      <div>
+        <div class="info-label">RSVP by</div>
+        <div class="info-value">Monday 1 June 2026</div>
+      </div>
+    </div>
+    <div class="info-row">
+      <div class="info-icon">💬</div>
+      <div>
+        <div class="info-label">Questions?</div>
+        <div class="info-value">
+          WhatsApp our event assistant for venue directions, parking, and more.<br />
+          <a href="#" style="color:var(--dusty-rose); font-weight:700; font-size:0.875rem;">Message on WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gift registry -->
+  <div class="rsvp-card">
+    <h3 style="font-family:var(--font-heading); font-size:1rem; margin-bottom:6px;">Gift registry</h3>
+    <p class="text-sm text-muted" style="margin-bottom:16px;">Your presence is the greatest gift. Should you wish to give, here are our registries:</p>
+    <a href="#" class="registry-link">
+      <div>
+        <div class="registry-link-name">🏬 John Lewis</div>
+        <div class="registry-link-sub">Home &amp; lifestyle gifts</div>
+      </div>
+      <span style="color:var(--muted);">→</span>
+    </a>
+    <a href="#" class="registry-link">
+      <div>
+        <div class="registry-link-name">🍯 Honeyfund</div>
+        <div class="registry-link-sub">Contribute to our honeymoon</div>
+      </div>
+      <span style="color:var(--muted);">→</span>
+    </a>
+  </div>
+
+  <div class="powered-by">
+    Powered by <a href="index.html">🌸 Petal</a> · Beautiful event planning
+  </div>
+
+</div>
+
+<script>
+  let rsvpChoice = null;
+
+  function selectRsvp(choice, btn) {
+    rsvpChoice = choice;
+    document.querySelectorAll('.rsvp-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('accept-form').style.display  = choice === 'accept'  ? 'block' : 'none';
+    document.getElementById('decline-form').style.display = choice === 'decline' ? 'block' : 'none';
+  }
+
+  function submitRsvp() {
+    document.getElementById('rsvp-form').style.display    = 'none';
+    document.getElementById('rsvp-success').style.display = 'block';
+    if (rsvpChoice === 'decline') {
+      document.querySelector('#rsvp-success .big-emoji').textContent = '💌';
+      document.querySelector('#rsvp-success h2').textContent = 'Your regrets have been sent';
+      document.querySelector('#rsvp-success p').textContent = 'Thank you for letting Sophie & James know. You'll be missed!';
+    }
+  }
+</script>
+
+</body>
+</html>

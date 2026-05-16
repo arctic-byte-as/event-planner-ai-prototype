@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Petal — Beautiful event planning for life's most precious moments</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Page-specific overrides */
+    .hero { padding: 96px 0 80px; }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blush);
+      color: var(--deep-rose);
+      border: 1px solid var(--blush-deep);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero h1 { max-width: 700px; margin-bottom: 24px; }
+    .hero h1 em { color: var(--dusty-rose); font-style: italic; }
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .hero-trust {
+      margin-top: 20px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mockup {
+      width: 100%;
+      max-width: 580px;
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      border: 1px solid var(--light-gray);
+    }
+    .mockup-header {
+      background: linear-gradient(135deg, #F9E4E6, #F5ECD7);
+      padding: 20px 24px 0;
+      height: 140px;
+      position: relative;
+    }
+    .mockup-header-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      color: var(--deep-rose);
+    }
+    .mockup-header-sub { font-size: 0.8rem; color: var(--warm-gray); margin-top: 4px; }
+    .mockup-body { padding: 20px 24px; }
+    .mockup-stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+    .mockup-stat {
+      background: var(--ivory);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      text-align: center;
+    }
+    .mockup-stat-val { font-family: var(--font-heading); font-size: 1.4rem; color: var(--charcoal); }
+    .mockup-stat-lbl { font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+    .mockup-guest-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--light-gray);
+      font-size: 0.82rem;
+    }
+    .mockup-guest-row:last-child { border-bottom: none; }
+    .mockup-guest-name { display: flex; align-items: center; gap: 8px; }
+
+    /* Features */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: var(--radius-xl);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-xs);
+      transition: all 0.25s ease;
+    }
+    .feature-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 18px;
+    }
+    .feature-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
+    .feature-card p { font-size: 0.9rem; line-height: 1.6; }
+
+    /* Event types */
+    .event-type-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+      justify-content: center;
+    }
+    .event-type-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1.5px solid var(--light-gray);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--warm-gray);
+      box-shadow: var(--shadow-xs);
+    }
+
+    /* Pricing */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      max-width: 720px;
+      margin: 48px auto 0;
+    }
+    .pricing-card {
+      background: var(--white);
+      border: 1.5px solid var(--light-gray);
+      border-radius: var(--radius-xl);
+      padding: 36px;
+      position: relative;
+      box-shadow: var(--shadow-sm);
+    }
+    .pricing-card.featured {
+      border-color: var(--rose);
+      box-shadow: 0 0 0 4px rgba(212,132,154,0.12), var(--shadow-md);
+    }
+    .pricing-tag {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--dusty-rose), var(--deep-rose));
+      color: var(--white);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .pricing-price {
+      font-family: var(--font-heading);
+      font-size: 2.75rem;
+      font-weight: 700;
+      color: var(--charcoal);
+      line-height: 1;
+      margin: 16px 0 4px;
+    }
+    .pricing-price sup { font-size: 1.2rem; vertical-align: super; }
+    .pricing-features { margin: 24px 0; }
+    .pricing-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 7px 0;
+      font-size: 0.875rem;
+      color: var(--warm-gray);
+      border-bottom: 1px solid var(--light-gray);
+    }
+    .pricing-feature:last-child { border-bottom: none; }
+    .check { color: var(--success); font-size: 1rem; margin-top: 1px; flex-shrink: 0; }
+    .cross { color: var(--muted); font-size: 0.9rem; margin-top: 1px; flex-shrink: 0; }
+
+    /* Testimonials */
+    .testimonials { background: var(--blush); }
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow-xs);
+    }
+    .stars { color: var(--champagne); font-size: 1rem; letter-spacing: 2px; margin-bottom: 12px; }
+    .testimonial-text {
+      font-family: var(--font-heading);
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--charcoal);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .testimonial-author { font-size: 0.82rem; font-weight: 700; color: var(--warm-gray); }
+    .testimonial-role  { font-size: 0.78rem; color: var(--muted); }
+
+    /* CTA banner */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--deep-rose) 0%, #7A3050 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 80px 24px;
+    }
+    .cta-banner h2 { color: var(--white); margin-bottom: 16px; }
+    .cta-banner .lead { color: rgba(255,255,255,0.8); margin-bottom: 32px; }
+    .btn-white {
+      background: var(--white);
+      color: var(--deep-rose);
+      font-weight: 700;
+    }
+    .btn-white:hover { background: var(--blush); }
+
+    @media (max-width: 900px) {
+      .features-grid, .testimonial-grid { grid-template-columns: 1fr; }
+      .hero-two-col { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ─────────────────────────────────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="petal">🌸</span> Petal
+    </div>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="nav-actions">
+      <a href="dashboard.html" class="btn btn-ghost btn-sm">Sign in</a>
+      <a href="dashboard.html" class="btn btn-primary btn-sm">Start free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ───────────────────────────────────────────── -->
+<section class="hero hero-gradient">
+  <div class="container">
+    <div class="flex gap-32" style="align-items:center;" class="hero-two-col">
+      <div style="flex:1; min-width:280px;">
+        <div class="hero-eyebrow">
+          ✨ AI-powered wedding planning
+        </div>
+        <h1>
+          Plan your <em>perfect day</em> with a little magic
+        </h1>
+        <p class="lead" style="max-width:480px; margin-bottom:32px;">
+          From engagement parties to the big day itself — Petal helps brides,
+          mothers, and planners create beautiful events, manage guests effortlessly,
+          and let AI do the heavy lifting.
+        </p>
+        <div class="hero-actions">
+          <a href="dashboard.html" class="btn btn-primary btn-lg">Start planning free →</a>
+          <a href="#features" class="btn btn-ghost btn-lg">See how it works</a>
+        </div>
+        <p class="hero-trust">
+          ✓ Free forever &nbsp;·&nbsp; ✓ No credit card needed &nbsp;·&nbsp; ✓ Ready in minutes
+        </p>
+      </div>
+
+      <!-- Dashboard mockup -->
+      <div style="flex:1; min-width:280px; display:flex; justify-content:center;">
+        <div class="mockup">
+          <div class="mockup-header">
+            <div class="mockup-header-title">✨ Sophie & James — Wedding</div>
+            <div class="mockup-header-sub">Saturday 14 June 2026 · Rosewood Manor, Surrey</div>
+          </div>
+          <div class="mockup-body">
+            <div class="mockup-stat-row">
+              <div class="mockup-stat">
+                <div class="mockup-stat-val">127</div>
+                <div class="mockup-stat-lbl">Invited</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-val" style="color:var(--success);">84</div>
+                <div class="mockup-stat-lbl">Accepted</div>
+              </div>
+              <div class="mockup-stat">
+                <div class="mockup-stat-val" style="color:var(--warning);">31</div>
+                <div class="mockup-stat-lbl">Pending</div>
+              </div>
+            </div>
+            <div class="ai-panel" style="margin-bottom:12px;">
+              <div class="ai-panel-label">✨ AI suggestion ready</div>
+              <p style="font-size:0.82rem; color:var(--warm-gray); margin:0;">Your wedding invitation copy is ready to review. <a href="#" style="color:var(--dusty-rose); font-weight:700;">View draft →</a></p>
+            </div>
+            <div class="mockup-guest-row">
+              <div class="mockup-guest-name">
+                <div class="avatar" style="background:var(--rose); font-size:0.65rem;">CM</div>
+                <div>
+                  <div style="font-weight:700; font-size:0.82rem;">Charlotte Mills</div>
+                  <div style="font-size:0.72rem; color:var(--muted);">Maid of Honour</div>
+                </div>
+              </div>
+              <span class="badge badge-accepted">✓ Accepted</span>
+            </div>
+            <div class="mockup-guest-row">
+              <div class="mockup-guest-name">
+                <div class="avatar" style="background:var(--champagne); font-size:0.65rem;">JB</div>
+                <div>
+                  <div style="font-weight:700; font-size:0.82rem;">James Brown + guest</div>
+                  <div style="font-size:0.72rem; color:var(--muted);">Groom's Side</div>
+                </div>
+              </div>
+              <span class="badge badge-pending">⏱ Pending</span>
+            </div>
+            <div class="mockup-guest-row">
+              <div class="mockup-guest-name">
+                <div class="avatar" style="background:var(--deep-rose); font-size:0.65rem;">AW</div>
+                <div>
+                  <div style="font-weight:700; font-size:0.82rem;">Amanda Walsh</div>
+                  <div style="font-size:0.72rem; color:var(--muted);">Bridesmaid</div>
+                </div>
+              </div>
+              <span class="badge badge-accepted">✓ Accepted</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event type pills -->
+    <div class="event-type-pills">
+      <div class="event-type-pill">💍 Wedding</div>
+      <div class="event-type-pill">🥂 Engagement Party</div>
+      <div class="event-type-pill">🌸 Bridal Shower</div>
+      <div class="event-type-pill">🎉 Bachelorette</div>
+      <div class="event-type-pill">🍽️ Rehearsal Dinner</div>
+      <div class="event-type-pill">💐 Thank-you Celebration</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Features ───────────────────────────────────────── -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="text-center">
+      <p class="petal-divider">— ✿ —</p>
+      <h2>Everything you need, nothing you don't</h2>
+      <p class="lead mt-16" style="max-width:520px; margin:16px auto 0;">
+        Petal handles the logistics so you can focus on the moments that matter.
+      </p>
+    </div>
+
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--blush);">✨</div>
+        <h3>AI Invitation Writer</h3>
+        <p>Describe your vision and let Claude craft the perfect invitation — romantic, formal, or fun. Every word editable, always yours.</p>
+        <span class="badge badge-pro mt-16">Pro</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--champagne-light);">📋</div>
+        <h3>Smart Guest Management</h3>
+        <p>Organise guests by side, group, and role. Track plus-ones, dietary needs, and RSVPs in one beautifully simple view.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--blush);">💬</div>
+        <h3>WhatsApp RSVP</h3>
+        <p>Guests reply YES or NO on WhatsApp — no app download, no login required. Our AI chatbot answers their questions 24/7.</p>
+        <span class="badge badge-pro mt-16">Pro</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--success-light);">🪑</div>
+        <h3>Seating Chart Builder</h3>
+        <p>Drag guests to tables, see dietary flags at a glance, and export a print-ready PDF for the big day.</p>
+        <span class="badge badge-pro mt-16">Pro</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--champagne-light);">📝</div>
+        <h3>Vow Writing Assistant</h3>
+        <p>Answer a few gentle prompts and Claude will draft heartfelt personalised vows. Three tones, always a starting point never the final word.</p>
+        <span class="badge badge-pro mt-16">Pro</span>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon" style="background:var(--blush);">🌐</div>
+        <h3>Wedding Mini-Website</h3>
+        <p>A gorgeous shareable page with your hero photo, event details, dress code, and RSVP button. Share the link — no account needed for guests.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Testimonials ───────────────────────────────────── -->
+<section class="section testimonials" id="how-it-works">
+  <div class="container">
+    <div class="text-center">
+      <p class="petal-divider">— ✿ —</p>
+      <h2>Loved by brides &amp; their mothers</h2>
+    </div>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"I set up our entire bridal shower in 20 minutes. The AI wrote an invitation that made everyone cry — in the best way."</p>
+        <div class="testimonial-author">Sophie A.</div>
+        <div class="testimonial-role">Bride · Surrey</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Managing 140 guests used to be a spreadsheet nightmare. Petal let me track every RSVP, dietary need, and plus-one in one place."</p>
+        <div class="testimonial-author">Margaret H.</div>
+        <div class="testimonial-role">Mother of the Bride · Edinburgh</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The WhatsApp RSVP feature was a game changer. My older relatives who never check email replied YES within minutes."</p>
+        <div class="testimonial-author">Priya R.</div>
+        <div class="testimonial-role">Bride · London</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ─────────────────────────────────────────── -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="text-center">
+      <p class="petal-divider">— ✿ —</p>
+      <h2>Simple, honest pricing</h2>
+      <p class="lead mt-16">Start free. Upgrade when you're ready for the full experience.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <h3 style="font-family:var(--font-heading);">Free</h3>
+        <div class="pricing-price"><sup>$</sup>0</div>
+        <p class="text-sm text-muted">Forever free</p>
+        <div class="pricing-features">
+          <div class="pricing-feature"><span class="check">✓</span> Up to 3 events</div>
+          <div class="pricing-feature"><span class="check">✓</span> 50 guests per event</div>
+          <div class="pricing-feature"><span class="check">✓</span> Email invitations</div>
+          <div class="pricing-feature"><span class="check">✓</span> RSVP tracking</div>
+          <div class="pricing-feature"><span class="check">✓</span> Mini-website</div>
+          <div class="pricing-feature"><span class="cross">—</span> AI writing assistant</div>
+          <div class="pricing-feature"><span class="cross">—</span> WhatsApp RSVP</div>
+          <div class="pricing-feature"><span class="cross">—</span> Seating chart</div>
+          <div class="pricing-feature"><span class="cross">—</span> Vow writing</div>
+        </div>
+        <a href="dashboard.html" class="btn btn-outline" style="width:100%; justify-content:center;">Get started free</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-tag">Most popular</div>
+        <h3 style="font-family:var(--font-heading);">Pro</h3>
+        <div class="pricing-price"><sup>$</sup>12</div>
+        <p class="text-sm text-muted">per month · cancel anytime</p>
+        <div class="pricing-features">
+          <div class="pricing-feature"><span class="check">✓</span> Unlimited events &amp; guests</div>
+          <div class="pricing-feature"><span class="check">✓</span> Email invitations</div>
+          <div class="pricing-feature"><span class="check">✓</span> RSVP tracking</div>
+          <div class="pricing-feature"><span class="check">✓</span> Mini-website</div>
+          <div class="pricing-feature"><span class="check">✓</span> <strong>AI invitation &amp; description writer</strong></div>
+          <div class="pricing-feature"><span class="check">✓</span> <strong>WhatsApp RSVP + AI chatbot</strong></div>
+          <div class="pricing-feature"><span class="check">✓</span> <strong>Seating chart builder</strong></div>
+          <div class="pricing-feature"><span class="check">✓</span> <strong>Vow writing assistant</strong></div>
+          <div class="pricing-feature"><span class="check">✓</span> <strong>Thank-you note generator</strong></div>
+        </div>
+        <a href="dashboard.html" class="btn btn-primary" style="width:100%; justify-content:center;">Start Pro free for 14 days</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA Banner ──────────────────────────────────────── -->
+<section class="cta-banner">
+  <div class="container">
+    <p class="petal-divider" style="color:rgba(255,255,255,0.5);">— ✿ —</p>
+    <h2>Your perfect day deserves a perfect plan</h2>
+    <p class="lead">Join thousands of brides and planners who trust Petal to handle the details.</p>
+    <a href="dashboard.html" class="btn btn-white btn-lg">Start planning for free →</a>
+  </div>
+</section>
+
+<!-- ── Footer ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">🌸 Petal</div>
+      <p style="font-size:0.85rem; margin-top:12px; max-width:260px; line-height:1.7;">
+        Beautiful AI-powered event planning for life's most precious moments.
+      </p>
+    </div>
+    <div>
+      <h4 style="color:var(--white); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px;">Product</h4>
+      <ul style="display:flex; flex-direction:column; gap:10px;">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--white); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px;">Events</h4>
+      <ul style="display:flex; flex-direction:column; gap:10px;">
+        <li><a href="#">Weddings</a></li>
+        <li><a href="#">Bridal Showers</a></li>
+        <li><a href="#">Bachelorette</a></li>
+        <li><a href="#">Rehearsal Dinner</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--white); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px;">Legal</h4>
+      <ul style="display:flex; flex-direction:column; gap:10px;">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Petal. Made with 🌸 for every couple.</span>
+    <span>Powered by Claude AI &amp; Supabase</span>
+  </div>
+</footer>
+
+</body>
+</html>

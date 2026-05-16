@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Petal</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .page-header { margin-bottom: 28px; }
+    .page-header h2 { font-family: var(--font-heading); margin-bottom: 4px; }
+    .event-card {
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .event-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .event-cover {
+      height: 130px;
+      background: linear-gradient(135deg, #F9E4E6, #F5ECD7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .event-card-body { padding: 18px 20px; }
+    .event-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 4px;
+    }
+    .event-card-date { font-size: 0.82rem; color: var(--muted); margin-bottom: 12px; }
+    .event-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid var(--light-gray);
+      margin-top: 10px;
+    }
+    .guest-count { font-size: 0.78rem; color: var(--warm-gray); }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 1000px) {
+      .events-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-row   { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="petal">🌸</span> Petal</a>
+    <div class="nav-actions" style="gap:16px;">
+      <a href="create-event.html" class="btn btn-primary btn-sm">+ New event</a>
+      <div class="avatar" style="background:var(--rose);">SH</div>
+    </div>
+  </div>
+</nav>
+
+<div class="app-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <a href="dashboard.html" class="active">
+        <span class="sidebar-icon">🏠</span> Dashboard
+      </a>
+      <a href="#">
+        <span class="sidebar-icon">📅</span> My Events
+      </a>
+      <a href="#">
+        <span class="sidebar-icon">👥</span> Guests
+      </a>
+      <a href="#">
+        <span class="sidebar-icon">💌</span> Invitations
+      </a>
+      <a href="#">
+        <span class="sidebar-icon">✨</span> AI Assistant
+      </a>
+      <div class="divider" style="margin:12px 16px;"></div>
+      <a href="#">
+        <span class="sidebar-icon">⚙️</span> Settings
+      </a>
+      <a href="#">
+        <span class="sidebar-icon">💳</span> Billing
+      </a>
+    </nav>
+
+    <!-- Free tier usage -->
+    <div style="padding:16px 20px; margin-top:auto;">
+      <div style="background:var(--ivory); border-radius:var(--radius-md); padding:14px;">
+        <div class="flex-between" style="margin-bottom:6px;">
+          <span style="font-size:0.75rem; font-weight:700; color:var(--charcoal);">Free Plan</span>
+          <span style="font-size:0.72rem; color:var(--muted);">2 / 3 events</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:66%;"></div>
+        </div>
+        <a href="#" class="btn btn-gold btn-sm" style="width:100%; justify-content:center; margin-top:10px; font-size:0.75rem;">
+          ✨ Upgrade to Pro
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main-content">
+
+    <div class="page-header flex-between">
+      <div>
+        <h2>Good afternoon, Sophie 🌸</h2>
+        <p class="text-sm text-muted">Your upcoming events at a glance</p>
+      </div>
+      <a href="create-event.html" class="btn btn-primary">+ Plan a new event</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--blush);">📅</div>
+        <div class="stat-value">2</div>
+        <div class="stat-label">Active Events</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--success-light);">✓</div>
+        <div class="stat-value" style="color:var(--success);">84</div>
+        <div class="stat-label">RSVPs Accepted</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--warning-light);">⏱</div>
+        <div class="stat-value" style="color:var(--warning);">31</div>
+        <div class="stat-label">Awaiting Reply</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background:var(--champagne-light);">📆</div>
+        <div class="stat-value">28</div>
+        <div class="stat-label">Days to Wedding</div>
+      </div>
+    </div>
+
+    <!-- AI upgrade nudge -->
+    <div class="upgrade-prompt" style="margin-bottom:28px;">
+      <span style="font-size:1.6rem;">✨</span>
+      <div style="flex:1;">
+        <div style="font-weight:700; font-size:0.9rem; color:var(--charcoal); margin-bottom:2px;">Let AI write your wedding invitations</div>
+        <p style="font-size:0.82rem; color:var(--warm-gray); margin:0;">Upgrade to Pro and Claude will craft beautiful, personalised invitations in seconds.</p>
+      </div>
+      <a href="#" class="btn btn-gold btn-sm">Upgrade — $12/mo</a>
+    </div>
+
+    <!-- Events grid -->
+    <div class="flex-between" style="margin-bottom:16px;">
+      <h3 style="font-family:var(--font-heading); font-size:1.1rem;">My Events</h3>
+      <a href="#" class="text-sm" style="color:var(--dusty-rose); font-weight:700;">View all</a>
+    </div>
+
+    <div class="events-grid">
+
+      <a href="event-detail.html" class="event-card">
+        <div class="event-cover" style="background:linear-gradient(135deg,#F9E4E6,#F5ECD7);">
+          💍
+        </div>
+        <div class="event-card-body">
+          <div class="flex-between" style="margin-bottom:6px;">
+            <span class="badge badge-published">Published</span>
+            <span class="text-xs text-muted">Wedding</span>
+          </div>
+          <div class="event-card-title">Sophie &amp; James — Wedding</div>
+          <div class="event-card-date">📍 Rosewood Manor, Surrey &nbsp;·&nbsp; 14 Jun 2026</div>
+          <div class="event-card-footer">
+            <div class="guest-count">127 invited &nbsp;·&nbsp; <span style="color:var(--success); font-weight:700;">84 accepted</span></div>
+            <span style="font-size:0.78rem; color:var(--muted);">31 pending →</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="event-detail.html" class="event-card">
+        <div class="event-cover" style="background:linear-gradient(135deg,#EBD5F0,#F9E4E6);">
+          🌸
+        </div>
+        <div class="event-card-body">
+          <div class="flex-between" style="margin-bottom:6px;">
+            <span class="badge badge-published">Published</span>
+            <span class="text-xs text-muted">Bridal Shower</span>
+          </div>
+          <div class="event-card-title">Sophie's Bridal Shower</div>
+          <div class="event-card-date">📍 The Garden Room, Chelsea &nbsp;·&nbsp; 7 Jun 2026</div>
+          <div class="event-card-footer">
+            <div class="guest-count">24 invited &nbsp;·&nbsp; <span style="color:var(--success); font-weight:700;">19 accepted</span></div>
+            <span style="font-size:0.78rem; color:var(--muted);">5 pending →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Create new CTA card -->
+      <a href="create-event.html" class="event-card" style="display:flex; align-items:center; justify-content:center; min-height:240px; border-style:dashed; border-color:var(--rose); box-shadow:none; background:transparent;">
+        <div class="empty-state" style="padding:32px;">
+          <div class="empty-state-icon">🌸</div>
+          <h3 style="font-size:1rem;">Plan another event</h3>
+          <p style="font-size:0.82rem;">1 event slot remaining on Free plan</p>
+          <span class="btn btn-outline btn-sm" style="margin-top:12px;">+ Create event</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Recent activity -->
+    <div style="margin-top:36px;">
+      <h3 style="font-family:var(--font-heading); font-size:1.1rem; margin-bottom:16px;">Recent activity</h3>
+      <div class="card">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Guest</th>
+              <th>Event</th>
+              <th>Action</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="avatar" style="background:var(--rose); font-size:0.65rem;">CM</div>
+                  Charlotte Mills
+                </div>
+              </td>
+              <td style="color:var(--warm-gray);">Sophie &amp; James — Wedding</td>
+              <td><span class="badge badge-accepted">RSVP'd Accepted</span></td>
+              <td class="text-muted text-sm">2 hours ago</td>
+            </tr>
+            <tr>
+              <td>
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="avatar" style="background:var(--champagne); font-size:0.65rem;">PR</div>
+                  Patricia Reynolds
+                </div>
+              </td>
+              <td style="color:var(--warm-gray);">Sophie's Bridal Shower</td>
+              <td><span class="badge badge-accepted">RSVP'd Accepted</span></td>
+              <td class="text-muted text-sm">5 hours ago</td>
+            </tr>
+            <tr>
+              <td>
+                <div style="display:flex; align-items:center; gap:10px;">
+                  <div class="avatar" style="background:var(--deep-rose); font-size:0.65rem;">TD</div>
+                  Thomas Dawson
+                </div>
+              </td>
+              <td style="color:var(--warm-gray);">Sophie &amp; James — Wedding</td>
+              <td><span class="badge badge-declined">RSVP'd Declined</span></td>
+              <td class="text-muted text-sm">Yesterday</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+</body>
+</html>

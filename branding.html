@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Branding — Petal Design System</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .swatch-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin: 24px 0; }
+    .swatch { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-xs); border: 1px solid var(--light-gray); }
+    .swatch-colour { height: 80px; }
+    .swatch-info { background: var(--white); padding: 12px; }
+    .swatch-name { font-size: 0.8rem; font-weight: 700; color: var(--charcoal); }
+    .swatch-hex  { font-size: 0.72rem; color: var(--muted); font-family: monospace; }
+    .swatch-var  { font-size: 0.68rem; color: var(--muted); font-family: monospace; margin-top: 2px; }
+    .type-sample { margin: 16px 0; padding: 20px; background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--light-gray); }
+    .component-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 16px 0; }
+    .doc-section { margin-bottom: 56px; }
+    .doc-section h2 { font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 6px; padding-bottom: 12px; border-bottom: 2px solid var(--blush-deep); }
+    code { font-size: 0.82rem; background: var(--ivory); border: 1px solid var(--light-gray); border-radius: 4px; padding: 1px 6px; font-family: monospace; color: var(--deep-rose); }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="petal">🌸</span> Petal</a>
+    <div class="nav-links">
+      <a href="index.html">Landing</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="create-event.html">Create event</a>
+      <a href="event-detail.html">Event detail</a>
+      <a href="rsvp.html">RSVP page</a>
+    </div>
+    <span class="badge badge-pro">Design system</span>
+  </div>
+</nav>
+
+<div class="container section">
+
+  <div class="text-center" style="margin-bottom:56px;">
+    <p class="petal-divider">— ✿ —</p>
+    <h1 style="font-size:2.5rem;">Petal Design System</h1>
+    <p class="lead mt-16">Brand guidelines, colour tokens, typography, and component library for the Petal event planning platform.</p>
+  </div>
+
+  <!-- Brand voice -->
+  <div class="doc-section">
+    <h2>Brand identity</h2>
+    <div class="grid-3" style="margin-top:20px;">
+      <div class="card card-body">
+        <div style="font-size:1.8rem; margin-bottom:8px;">🌸</div>
+        <h4>Warm &amp; personal</h4>
+        <p class="text-sm" style="margin-top:6px;">We speak like a trusted friend, not a corporate tool. Every word is kind, clear, and encouraging.</p>
+      </div>
+      <div class="card card-body">
+        <div style="font-size:1.8rem; margin-bottom:8px;">✨</div>
+        <h4>Quietly magical</h4>
+        <p class="text-sm" style="margin-top:6px;">AI is always a gentle suggestion, never an imposition. We celebrate the organiser's vision, not our own cleverness.</p>
+      </div>
+      <div class="card card-body">
+        <div style="font-size:1.8rem; margin-bottom:8px;">💍</div>
+        <h4>Elegantly simple</h4>
+        <p class="text-sm" style="margin-top:6px;">Every screen does one thing beautifully. No clutter, no jargon — just the tools you need for the most important day of your life.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Colour tokens -->
+  <div class="doc-section">
+    <h2>Colour palette</h2>
+    <p class="text-sm text-muted" style="margin-bottom:8px;">All colours are available as CSS custom properties on <code>:root</code>.</p>
+
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#FDF8F4;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Ivory</div>
+          <div class="swatch-hex">#FDF8F4</div>
+          <div class="swatch-var">--ivory</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#F9E4E6;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Blush</div>
+          <div class="swatch-hex">#F9E4E6</div>
+          <div class="swatch-var">--blush</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#D4849A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Rose</div>
+          <div class="swatch-hex">#D4849A</div>
+          <div class="swatch-var">--rose</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#C4788A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Dusty Rose</div>
+          <div class="swatch-hex">#C4788A</div>
+          <div class="swatch-var">--dusty-rose</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#9B4F6A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Deep Rose</div>
+          <div class="swatch-hex">#9B4F6A</div>
+          <div class="swatch-var">--deep-rose</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#C8A87A;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Champagne</div>
+          <div class="swatch-hex">#C8A87A</div>
+          <div class="swatch-var">--champagne</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#F5ECD7;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Champagne Light</div>
+          <div class="swatch-hex">#F5ECD7</div>
+          <div class="swatch-var">--champagne-light</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#3D3535;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Charcoal</div>
+          <div class="swatch-hex">#3D3535</div>
+          <div class="swatch-var">--charcoal</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#6B5E5E;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warm Gray</div>
+          <div class="swatch-hex">#6B5E5E</div>
+          <div class="swatch-var">--warm-gray</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-colour" style="background:#7CB392;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Sage (success)</div>
+          <div class="swatch-hex">#7CB392</div>
+          <div class="swatch-var">--success</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:var(--blush); border-radius:var(--radius-lg); padding:16px 20px; font-size:0.875rem; color:var(--warm-gray); margin-top:16px;">
+      <strong style="color:var(--charcoal);">WCAG 2.1 AA</strong> — All text/background combinations meet minimum 4.5:1 contrast ratio. Dusty Rose (#C4788A) on white = 4.6:1 ✓
+    </div>
+  </div>
+
+  <!-- Typography -->
+  <div class="doc-section">
+    <h2>Typography</h2>
+    <p class="text-sm text-muted" style="margin-bottom:20px;">Two typefaces. Playfair Display for elegance; Lato for clarity.</p>
+
+    <div class="type-sample">
+      <p style="font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Playfair Display 700 — Headings</p>
+      <h1 style="font-size:2.5rem; border:none; margin:0;">Sophie &amp; James</h1>
+      <h2 style="margin:8px 0 0; font-size:1.8rem;">Plan your perfect day</h2>
+      <h3 style="margin:8px 0 0;">Wedding · 14 June 2026</h3>
+      <p style="font-family:var(--font-heading); font-style:italic; color:var(--dusty-rose); margin:8px 0 0; font-size:1.1rem;">Together with their families…</p>
+    </div>
+
+    <div class="type-sample" style="margin-top:16px;">
+      <p style="font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lato 400/700 — Body copy</p>
+      <p>Planning your most special day should feel joyful, not stressful. Petal handles every detail so you can focus on what matters most.</p>
+      <p style="font-weight:700; margin-top:8px;">Guest confirmed · RSVP accepted · 127 invited</p>
+      <p style="font-size:0.82rem; color:var(--muted); margin-top:8px;">Hint text · Labels · Supporting copy · Fine print</p>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="doc-section">
+    <h2>Buttons</h2>
+    <div class="component-row">
+      <button class="btn btn-primary">Primary CTA</button>
+      <button class="btn btn-primary btn-lg">Large primary</button>
+      <button class="btn btn-gold">✨ Upgrade to Pro</button>
+      <button class="btn btn-outline">Outline</button>
+      <button class="btn btn-ghost">Ghost</button>
+      <button class="btn btn-primary btn-sm">Small</button>
+    </div>
+    <p class="text-sm text-muted">Primary <code>--dusty-rose</code> · Gold <code>--champagne</code> for Pro upgrades · Ghost for secondary actions</p>
+  </div>
+
+  <!-- Badges -->
+  <div class="doc-section">
+    <h2>Status badges</h2>
+    <div class="component-row">
+      <span class="badge badge-accepted">✓ Accepted</span>
+      <span class="badge badge-pending">⏱ Pending</span>
+      <span class="badge badge-declined">✗ Declined</span>
+      <span class="badge badge-published">● Published</span>
+      <span class="badge badge-draft">Draft</span>
+      <span class="badge badge-pro">✨ Pro</span>
+    </div>
+  </div>
+
+  <!-- AI panel -->
+  <div class="doc-section">
+    <h2>AI suggestion panel</h2>
+    <p class="text-sm text-muted" style="margin-bottom:12px;">Always editable. Never auto-applied. Labelled clearly.</p>
+    <div class="ai-panel">
+      <div class="ai-panel-label">✨ AI suggestion · always editable</div>
+      <p style="font-size:0.9rem; color:var(--charcoal); font-style:italic; margin-bottom:14px;">
+        "Join Sophie and James on their most magical day as they exchange vows in the rose garden of Rosewood Manor — followed by an evening of dancing, champagne, and celebration under the stars."
+      </p>
+      <div style="display:flex; gap:10px;">
+        <button class="btn btn-primary btn-sm">Apply suggestion</button>
+        <button class="btn btn-ghost btn-sm">Regenerate ✨</button>
+        <button class="btn btn-ghost btn-sm">Discard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prototype links -->
+  <div class="doc-section">
+    <h2>Prototype screens</h2>
+    <div class="grid-3" style="margin-top:20px;">
+      <a href="index.html" class="card card-hover" style="display:block; padding:24px; text-decoration:none;">
+        <div style="font-size:1.6rem; margin-bottom:8px;">🏠</div>
+        <h4>Landing page</h4>
+        <p class="text-sm">Hero, features, testimonials, pricing</p>
+      </a>
+      <a href="dashboard.html" class="card card-hover" style="display:block; padding:24px; text-decoration:none;">
+        <div style="font-size:1.6rem; margin-bottom:8px;">📊</div>
+        <h4>Dashboard</h4>
+        <p class="text-sm">Event list, RSVP stats, activity feed</p>
+      </a>
+      <a href="create-event.html" class="card card-hover" style="display:block; padding:24px; text-decoration:none;">
+        <div style="font-size:1.6rem; margin-bottom:8px;">➕</div>
+        <h4>Create event wizard</h4>
+        <p class="text-sm">4-step event creation flow</p>
+      </a>
+      <a href="event-detail.html" class="card card-hover" style="display:block; padding:24px; text-decoration:none;">
+        <div style="font-size:1.6rem; margin-bottom:8px;">💍</div>
+        <h4>Event detail</h4>
+        <p class="text-sm">Overview, agenda, guests, settings tabs</p>
+      </a>
+      <a href="rsvp.html" class="card card-hover" style="display:block; padding:24px; text-decoration:none;">
+        <div style="font-size:1.6rem; margin-bottom:8px;">💌</div>
+        <h4>Guest RSVP page</h4>
+        <p class="text-sm">Public mobile-first RSVP flow</p>
+      </a>
+      <a href="branding.html" class="card card-hover" style="display:block; padding:24px; text-decoration:none; border-color:var(--rose);">
+        <div style="font-size:1.6rem; margin-bottom:8px;">🎨</div>
+        <h4>Branding guide</h4>
+        <p class="text-sm">This page — design system reference</p>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Event — Petal</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .wizard-container {
+      max-width: 680px;
+      margin: 40px auto;
+      padding: 0 24px 80px;
+    }
+    .wizard-card {
+      background: var(--white);
+      border: 1px solid var(--light-gray);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+    }
+    .type-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .type-option {
+      border: 1.5px solid var(--light-gray);
+      border-radius: var(--radius-lg);
+      padding: 16px 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .type-option:hover  { border-color: var(--rose); background: var(--blush); }
+    .type-option.active { border-color: var(--dusty-rose); background: var(--blush); box-shadow: 0 0 0 3px rgba(196,120,138,0.15); }
+    .type-option .emoji { font-size: 1.8rem; margin-bottom: 6px; }
+    .type-option .label { font-size: 0.78rem; font-weight: 700; color: var(--charcoal); }
+    .date-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .step-content { display: none; }
+    .step-content.active { display: block; }
+    .ai-generate-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--blush);
+      border: 1.5px solid var(--rose);
+      border-radius: var(--radius-md);
+      color: var(--dusty-rose);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.2s;
+    }
+    .ai-generate-btn:hover { background: var(--blush-deep); }
+    .review-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--light-gray);
+      font-size: 0.875rem;
+    }
+    .review-row:last-child { border-bottom: none; }
+    .review-key { color: var(--muted); font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .review-val { color: var(--charcoal); text-align: right; max-width: 60%; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="petal">🌸</span> Petal</a>
+    <a href="dashboard.html" class="btn btn-ghost btn-sm">← Back to dashboard</a>
+  </div>
+</nav>
+
+<div class="wizard-container">
+
+  <div class="text-center" style="margin-bottom:32px;">
+    <h2 style="font-family:var(--font-heading);">Plan a new event</h2>
+    <p class="text-muted text-sm mt-8">Fill in the details and we'll take care of the rest.</p>
+  </div>
+
+  <!-- Wizard steps indicator -->
+  <div class="wizard-steps">
+    <div class="wizard-step">
+      <div class="step-circle active" id="circle-1">1</div>
+      <span class="step-label active" id="label-1">Details</span>
+    </div>
+    <div class="step-connector" id="conn-1"></div>
+    <div class="wizard-step">
+      <div class="step-circle" id="circle-2">2</div>
+      <span class="step-label" id="label-2">Location</span>
+    </div>
+    <div class="step-connector" id="conn-2"></div>
+    <div class="wizard-step">
+      <div class="step-circle" id="circle-3">3</div>
+      <span class="step-label" id="label-3">Description</span>
+    </div>
+    <div class="step-connector" id="conn-3"></div>
+    <div class="wizard-step">
+      <div class="step-circle" id="circle-4">4</div>
+      <span class="step-label" id="label-4">Review</span>
+    </div>
+  </div>
+
+  <div class="wizard-card">
+
+    <!-- ── Step 1: Details ──────────────────────────────── -->
+    <div class="step-content active" id="step-1">
+      <h3 style="font-family:var(--font-heading); margin-bottom:6px;">Event details</h3>
+      <p class="text-sm text-muted" style="margin-bottom:28px;">Tell us the basics about your celebration.</p>
+
+      <div class="form-group">
+        <label class="form-label">Event name <span style="color:var(--dusty-rose);">*</span></label>
+        <input class="form-input" type="text" placeholder="e.g. Sophie &amp; James — Wedding" value="Sophie &amp; James — Wedding" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">What type of event is this? <span style="color:var(--dusty-rose);">*</span></label>
+        <div class="type-grid">
+          <div class="type-option active">
+            <div class="emoji">💍</div>
+            <div class="label">Wedding</div>
+          </div>
+          <div class="type-option">
+            <div class="emoji">🥂</div>
+            <div class="label">Engagement Party</div>
+          </div>
+          <div class="type-option">
+            <div class="emoji">🌸</div>
+            <div class="label">Bridal Shower</div>
+          </div>
+          <div class="type-option">
+            <div class="emoji">🎉</div>
+            <div class="label">Bachelorette</div>
+          </div>
+          <div class="type-option">
+            <div class="emoji">🍽️</div>
+            <div class="label">Rehearsal Dinner</div>
+          </div>
+          <div class="type-option">
+            <div class="emoji">✨</div>
+            <div class="label">Other</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="date-row">
+        <div class="form-group">
+          <label class="form-label">Date <span style="color:var(--dusty-rose);">*</span></label>
+          <input class="form-input" type="date" value="2026-06-14" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Time <span style="color:var(--dusty-rose);">*</span></label>
+          <input class="form-input" type="time" value="13:00" />
+        </div>
+      </div>
+
+      <div class="date-row">
+        <div class="form-group">
+          <label class="form-label">End time</label>
+          <input class="form-input" type="time" value="23:00" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Timezone <span style="color:var(--dusty-rose);">*</span></label>
+          <select class="form-select">
+            <option>Europe/London (BST)</option>
+            <option>Europe/Paris (CET)</option>
+            <option>America/New_York (EST)</option>
+            <option>America/Los_Angeles (PST)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="flex-between" style="margin-top:8px;">
+        <span></span>
+        <button class="btn btn-primary" onclick="goToStep(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── Step 2: Location ─────────────────────────────── -->
+    <div class="step-content" id="step-2">
+      <h3 style="font-family:var(--font-heading); margin-bottom:6px;">Location</h3>
+      <p class="text-sm text-muted" style="margin-bottom:28px;">Where is the celebration taking place? This is optional — you can always add it later.</p>
+
+      <div class="form-group">
+        <label class="form-label">Venue name</label>
+        <input class="form-input" type="text" placeholder="e.g. Rosewood Manor" value="Rosewood Manor" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Full address</label>
+        <input class="form-input" type="text" placeholder="e.g. High Street, Guildford, Surrey GU1 1AB" value="Rosewood Lane, Guildford, Surrey GU2 4JT" />
+        <p class="form-hint">This will appear on the invitation and guest website.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Dress code</label>
+        <select class="form-select">
+          <option>Black Tie</option>
+          <option selected>Cocktail Attire</option>
+          <option>Garden Party</option>
+          <option>Smart Casual</option>
+          <option>Casual</option>
+          <option>Custom…</option>
+        </select>
+        <p class="form-hint">Shown on the RSVP page and included in invitation emails.</p>
+      </div>
+
+      <div class="flex-between" style="margin-top:8px;">
+        <button class="btn btn-ghost" onclick="goToStep(1)">← Back</button>
+        <div style="display:flex; gap:12px;">
+          <button class="btn btn-ghost" onclick="goToStep(3)">Skip</button>
+          <button class="btn btn-primary" onclick="goToStep(3)">Continue →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Step 3: Description ──────────────────────────── -->
+    <div class="step-content" id="step-3">
+      <h3 style="font-family:var(--font-heading); margin-bottom:6px;">Event description</h3>
+      <p class="text-sm text-muted" style="margin-bottom:28px;">Write a description that captures the magic of your event.</p>
+
+      <div class="form-group">
+        <label class="form-label">Description</label>
+        <textarea class="form-textarea" style="min-height:160px;" placeholder="Describe your event for guests…">Join us as Sophie and James celebrate their love surrounded by family and friends. An afternoon ceremony in the rose garden followed by an evening reception under the stars — an occasion you won't want to miss.</textarea>
+        <p class="form-hint">Shown on your event page and invitation emails.</p>
+      </div>
+
+      <!-- AI panel - locked for free tier -->
+      <div class="upgrade-prompt">
+        <span style="font-size:1.4rem;">✨</span>
+        <div style="flex:1;">
+          <div style="font-weight:700; font-size:0.875rem; color:var(--charcoal); margin-bottom:2px;">Generate with AI</div>
+          <p style="font-size:0.82rem; color:var(--warm-gray); margin:0;">Let Claude write a beautiful, personalised description from a short prompt. Available on Pro.</p>
+        </div>
+        <a href="#" class="btn btn-gold btn-sm">Upgrade to Pro</a>
+      </div>
+
+      <div class="form-group" style="margin-top:20px;">
+        <label class="form-label">Cover photo</label>
+        <div style="border:2px dashed var(--light-gray); border-radius:var(--radius-lg); padding:32px; text-align:center; color:var(--muted);">
+          <div style="font-size:2rem; margin-bottom:8px;">📷</div>
+          <p style="font-size:0.85rem; margin-bottom:8px;">Drop your engagement photo here, or</p>
+          <button class="btn btn-ghost btn-sm">Browse files</button>
+          <p class="form-hint" style="margin-top:8px;">JPEG, PNG or WebP · max 5 MB</p>
+        </div>
+      </div>
+
+      <div class="flex-between" style="margin-top:8px;">
+        <button class="btn btn-ghost" onclick="goToStep(2)">← Back</button>
+        <button class="btn btn-primary" onclick="goToStep(4)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- ── Step 4: Review ───────────────────────────────── -->
+    <div class="step-content" id="step-4">
+      <h3 style="font-family:var(--font-heading); margin-bottom:6px;">Review &amp; publish</h3>
+      <p class="text-sm text-muted" style="margin-bottom:28px;">Double-check everything looks perfect before publishing.</p>
+
+      <div style="background:var(--ivory); border-radius:var(--radius-lg); padding:20px 24px; margin-bottom:24px;">
+        <div class="review-row">
+          <span class="review-key">Event</span>
+          <span class="review-val">Sophie &amp; James — Wedding</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">Type</span>
+          <span class="review-val">💍 Wedding</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">Date &amp; time</span>
+          <span class="review-val">Saturday 14 June 2026, 1:00 pm – 11:00 pm BST</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">Venue</span>
+          <span class="review-val">Rosewood Manor, Guildford, Surrey</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">Dress code</span>
+          <span class="review-val">Cocktail Attire</span>
+        </div>
+        <div class="review-row">
+          <span class="review-key">Description</span>
+          <span class="review-val" style="font-style:italic; color:var(--warm-gray);">Join us as Sophie and James celebrate their love…</span>
+        </div>
+      </div>
+
+      <div class="ai-panel" style="margin-bottom:24px;">
+        <div class="ai-panel-label">✨ Next step after publishing</div>
+        <p style="font-size:0.85rem; color:var(--warm-gray); margin:0;">Once published, you can add guests, send invitations, and track RSVPs from the event dashboard.</p>
+      </div>
+
+      <div class="flex-between">
+        <button class="btn btn-ghost" onclick="goToStep(3)">← Back</button>
+        <div style="display:flex; gap:12px;">
+          <a href="event-detail.html" class="btn btn-ghost">Save as draft</a>
+          <a href="event-detail.html" class="btn btn-primary">🌸 Publish event</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function goToStep(n) {
+    // Hide all steps
+    document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+    document.getElementById('step-' + n).classList.add('active');
+
+    // Update step indicators
+    for (let i = 1; i <= 4; i++) {
+      const circle = document.getElementById('circle-' + i);
+      const label  = document.getElementById('label-' + i);
+      circle.classList.remove('active', 'complete');
+      label.classList.remove('active');
+      if (i < n) {
+        circle.classList.add('complete');
+        circle.textContent = '✓';
+      } else if (i === n) {
+        circle.classList.add('active');
+        label.classList.add('active');
+        circle.textContent = i;
+      } else {
+        circle.textContent = i;
+      }
+    }
+    // Update connectors
+    for (let i = 1; i <= 3; i++) {
+      const conn = document.getElementById('conn-' + i);
+      if (conn) conn.classList.toggle('complete', i < n);
+    }
+  }
+
+  // Type option selection
+  document.querySelectorAll('.type-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.type-option').forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
